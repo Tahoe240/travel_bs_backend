@@ -16,6 +16,12 @@ import router from './router'
 import axios from 'axios'
 import store from './store'
 
+import qs from "qs"
+Vue.prototype.$qs = qs;
+import VueLazyload from 'vue-lazyload';
+
+Vue.use(VueLazyload);
+
 Vue.use(ElementUI)
 Vue.use(VueParticles)
 

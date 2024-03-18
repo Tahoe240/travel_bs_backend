@@ -2,21 +2,22 @@
 <template>
   <div>
     <el-container>
-      <el-header>Header</el-header>
+<!--      <el-header>Header</el-header>-->
       <el-container>
         <el-aside class="aside">
-          <el-menu default-active="page1" class="el-menu-vertical-demo" :router="true" @open="handleOpen" @close="handleClose">
+          <el-menu default-active="/user/list" class="el-menu-vertical-demo" :router="true">
             <!-- 一级菜单项 -->
-            <el-submenu index="page1">
+            <el-submenu index="/user/list">
               <template slot="title">
                 <i class="el-icon-location"></i>
-                <span>页面1</span>
+                <span>系统管理</span>
               </template>
               <!-- 二级菜单项 -->
               <el-menu-item-group>
-                <el-menu-item index="/page1_1">页面1-1</el-menu-item>
-                <el-menu-item index="/page1-2">页面1-2</el-menu-item>
-                <el-menu-item index="/page1-3">页面1-3</el-menu-item>
+                <el-menu-item index="/user/list">用户管理</el-menu-item>
+                <el-menu-item index="/user/role">角色权限管理</el-menu-item>
+                <el-menu-item index="/user/permission">权限管理</el-menu-item>
+                <el-menu-item index="/user/role_permission">角色管理</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
           </el-menu>
@@ -32,6 +33,9 @@
 </template>
 
 
+
+
+
 <script>
 
 export default {
@@ -43,12 +47,7 @@ export default {
     }
   },
   methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
-    }
+
   }
 }
 </script>

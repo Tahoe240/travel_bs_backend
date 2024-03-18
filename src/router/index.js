@@ -70,14 +70,24 @@ const routes = [
         component: () => import('../views/Admin.vue'),
         children: [
             {
-                path: '/page1_1',
-                name: 'Page1_1',
-                component: () => import('../views/page1_1.vue')
+                path: '/user/list',
+                name: 'user',
+                component: () => import('../views/users/User.vue')
             },
             {
-                path: '/page1',
-                name: 'Page1',
-                component: () => import('../views/page1.vue')
+                path: '/user/role',
+                name: 'role',
+                component: () => import('../views/users/Role.vue')
+            },
+            {
+                path: '/user/permission',
+                name: 'permission',
+                component: () => import('../views/users/Permission.vue')
+            },
+            {
+                path: '/user/role_permission',
+                name: 'role_permission',
+                component: () => import('../views/users/Role_Permission.vue')
             }
         ]
     },
