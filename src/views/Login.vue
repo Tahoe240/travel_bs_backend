@@ -41,8 +41,10 @@ export default {
                     title: 'Success',
                     message: '登录成功！'
                   });
-                  // 如果使用 Vuex
                   localStorage.setItem('token', res.data.data.token);
+                  this.$store.commit("updateLoginUser", res.data.data);
+                  console.log("login===>user.avatar:"+this.$store.state.login_user.avatar);
+                  localStorage.setItem('login_user',JSON.stringify(res.data.data));
                   setTimeout(() => {
                     router.push("/");
                   }, 500);
@@ -89,10 +91,23 @@ export default {
     updateCaptcha() {
       this.captchaSrc = '/api/user/getCaptcha?time=' + Date.now()
       this.$message.success('验证码已更新')
+    },
+    autoSubmitForm() {
+      if (this.ruleForm.verifyCode.length === 4) {
+        this.submitForm();
+      }
+    }
+  },
+  watch: {
+    // 监听 ruleForm.verifyCode 的变化
+    'ruleForm.verifyCode': function(newVal) {
+      // 当验证码输入变化时，调用 autoSubmitForm 方法
+      this.autoSubmitForm();
     }
   },
   mounted() {
-    this.updateCaptcha()
+    this.updateCaptcha();
+    this.$watch('ruleForm.verifyCode', { immediate: true });
   }
 }
 </script>
@@ -128,7 +143,7 @@ export default {
         <el-form-item label="验证码" prop="verifyCode">
           <el-row>
             <el-col :span="15">
-              <el-input v-model="ruleForm.verifyCode"/>
+              <el-input v-model="ruleForm.verifyCode" @input="$forceUpdate()"/>
             </el-col>
 
             <el-col :span="8" :offset="1">

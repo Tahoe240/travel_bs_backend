@@ -28,6 +28,19 @@ Vue.use(VueParticles)
 
 Vue.prototype.$axios = axios
 
+import VueAMap from 'vue-amap';
+
+Vue.use(VueAMap);
+
+// 初始化 vue-amap 插件
+VueAMap.initAMapApiLoader({
+
+    // 高德地图的 key
+    key: '21281604864ec16301c6d9b5601ff5a8',
+    // 插件集合
+    plugin: ['AMap.Geolocation', 'AMap.Marker']
+});
+
 new Vue({
     el: '#app',
     router,

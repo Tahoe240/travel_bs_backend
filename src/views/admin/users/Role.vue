@@ -6,7 +6,7 @@
       <el-option
           v-for="item in roles"
           :key="item.roleId"
-          :label="item.roleName_zh"
+          :label="item.roleNameZh"
           :value="item.roleId"
       ></el-option>
     </el-select>

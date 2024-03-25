@@ -1,63 +1,41 @@
-// import { createRouter, createWebHistory } from 'vue-router'
-// import LoginComponent from '../views/Login.vue'
-// import HomeComponent from '../views/Home.vue'
-// const routes = [
-//     {
-//         path: '/login',
-//         name: 'Login',
-//         component: LoginComponent
-//     },
-//     {
-//         path: '/',
-//         name: 'Home',
-//         component: HomeComponent
-//     },
-//     {
-//         path: '/register',
-//         name: 'Register',
-//         component: () => import('../views/Register.vue')
-//     },
-//     {
-//         path: '/admin',
-//         name: 'Admin',
-//         component: () => import('../views/Admin.vue')
-//     },
-//     {
-//         path: '/page1',
-//         name: 'page1',
-//         component: () => import('../views/page1.vue')
-//     },
-//     {
-//         path: '/page1_1',
-//         name: 'page1_1',
-//         component: () => import('../views/page1_1.vue')
-//     }
-// ]
-//
-// const router = createRouter({
-//     history: createWebHistory(process.env.BASE_URL),
-//     routes
-// })
-//
+
 // export default router
 import VueRouter from 'vue-router'
 import Vue from 'vue'
 
 import LoginComponent from '../views/Login.vue'
-import HomeComponent from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
     {
+        path: '/',
+        name: '首页',
+        redirect: '/home',
+        component: () => import('../views/front/Index.vue'),
+        children:[
+            {
+                path: 'home',
+                name: 'home',
+                component: () => import('../views/front/home/Home.vue')
+            },
+            {
+                path: '/travelnote/:id',
+                name: "游记详情",
+                component: () => import('../views/front/travelnote/NoteDetail.vue')
+            },
+            {
+                path: '/write/travelnote',
+                name: '写游记',
+                component: () => import('../views/front/travelnote/WriteTravelNote.vue')
+            },
+
+        ]
+    },
+    {
         path: '/login',
         name: 'Login',
         component: LoginComponent
-    },
-    {
-        path: '/',
-        name: 'Home',
-        component: HomeComponent
     },
     {
         path: '/register',
@@ -65,33 +43,42 @@ const routes = [
         component: () => import('../views/Register.vue')
     },
     {
+        path: '/editortest',
+        name: 'EditorTest',
+        component: () => import('../views/front/travelnote/WangEditor.vue')
+    },
+    {
+        path: '/mapItem',
+        name: '地图测试',
+        component: () => import('../components/map/MapItem.vue')
+    },
+    {
         path: '/admin',
         name: 'Admin',
-        component: () => import('../views/Admin.vue'),
+        component: () => import('../views/admin/Admin.vue'),
         children: [
             {
                 path: '/user/list',
                 name: 'user',
-                component: () => import('../views/users/User.vue')
+                component: () => import('../views/admin/users/User.vue')
             },
             {
                 path: '/user/role',
                 name: 'role',
-                component: () => import('../views/users/Role.vue')
+                component: () => import('../views/admin/users/Role.vue')
             },
             {
                 path: '/user/permission',
                 name: 'permission',
-                component: () => import('../views/users/Permission.vue')
+                component: () => import('../views/admin/users/Permission.vue')
             },
             {
                 path: '/user/role_permission',
                 name: 'role_permission',
-                component: () => import('../views/users/Role_Permission.vue')
+                component: () => import('../views/admin/users/Role_Permission.vue')
             }
         ]
     },
-
 ]
 
 const router = new VueRouter({
